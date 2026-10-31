@@ -88,7 +88,7 @@ authRouter.post("/login", asyncRoute(async (req, res) => {
   });
 }));
 
-authRouter.post("/logout", asyncRoute(async (req, res) => {
+authRouter.post("/logout", authenticate, asyncRoute(async (req, res) => {
   const token = req.authToken;
   if (token && pool) {
     await pool.query("DELETE FROM auth_sessions WHERE token_hash = $1", [hashSessionToken(token)]);
