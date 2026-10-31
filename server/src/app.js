@@ -45,7 +45,7 @@ app.get("/health/live", (_req, res) => {
 app.get("/health/ready", async (_req, res, next) => {
   try {
     const database = await checkDatabase();
-    const ready = !database.configured || database.connected;
+    const ready = database.configured && database.connected;
     res.status(ready ? 200 : 503).json({
       status: ready ? "ready" : "not_ready",
       service: "rover-ai-api",
