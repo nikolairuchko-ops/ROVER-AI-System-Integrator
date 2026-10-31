@@ -26,13 +26,13 @@ test("liveness endpoint returns ok", async () => {
   });
 });
 
-test("system info exposes API version and planned capabilities", async () => {
+test("system info exposes API version and active capabilities", async () => {
   const response = await fetch(`${baseUrl}/api/v1/system/info`);
   const body = await response.json();
   assert.equal(response.status, 200);
   assert.equal(body.apiVersion, "v1");
   assert.equal(body.component, "API Gateway");
-  assert.equal(body.capabilities.authentication, "planned");
+  assert.equal(body.capabilities.authentication, "active");
 });
 
 test("unknown routes return a stable JSON 404", async () => {
