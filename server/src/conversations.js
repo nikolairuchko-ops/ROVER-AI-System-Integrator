@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { pool } from "./db.js";
+import { authenticate } from "./auth.js";
 import { asyncRoute, httpError, requireText } from "./http.js";
 
 export const conversationsRouter = Router();
 
-conversationsRouter.get("/projects/:projectId/conversations", asyncRoute(async (req, res) => {
+conversationsRouter.get("/projects/:projectId/conversations", authenticate, asyncRoute(async (req, res) => {
   const owned = await pool.query("SELECT id FROM projects WHERE id = $1 AND owner_id = $2", [req.params.projectId, req.user.id]);
   if (!owned.rows[0]) throw httpError(404, "PROJECT_NOT_FOUND", "Project not found.");
   const result = await pool.query(
@@ -14,7 +15,7 @@ conversationsRouter.get("/projects/:projectId/conversations", asyncRoute(async (
   res.json({ conversations: result.rows });
 }));
 
-conversationsRouter.post("/projects/:projectId/conversations", asyncRoute(async (req, res) => {
+conversationsRouter.post("/projects/:projectId/conversations", authenticate, asyncRoute(async (req, res) => {
   const owned = await pool.query("SELECT id FROM projects WHERE id = $1 AND owner_id = $2", [req.params.projectId, req.user.id]);
   if (!owned.rows[0]) throw httpError(404, "PROJECT_NOT_FOUND", "Project not found.");
   const title = req.body?.title === undefined ? "New conversation" : requireText(req.body.title, "Conversation title", 160);
@@ -25,7 +26,7 @@ conversationsRouter.post("/projects/:projectId/conversations", asyncRoute(async 
   res.status(201).json({ conversation: result.rows[0] });
 }));
 
-conversationsRouter.get("/conversations/:conversationId/messages", asyncRoute(async (req, res) => {
+conversationsRouter.get("/conversations/:conversationId/messages", authenticate, asyncRoute(async (req, res) => {
   const owned = await pool.query(
     "SELECT id FROM conversations WHERE id = $1 AND user_id = $2",
     [req.params.conversationId, req.user.id]
@@ -38,7 +39,7 @@ conversationsRouter.get("/conversations/:conversationId/messages", asyncRoute(as
   res.json({ messages: result.rows });
 }));
 
-conversationsRouter.post("/conversations/:conversationId/messages", asyncRoute(async (req, res) => {
+conversationsRouter.post("/conversations/:conversationId/messages", authenticate, asyncRoute(async (req, res) => {
   const role = req.body?.role;
   if (role !== "user") throw httpError(400, "INVALID_ROLE", "Only user messages can be submitted from the public API.");
   const content = requireText(req.body?.content, "Message content", 100_000);
