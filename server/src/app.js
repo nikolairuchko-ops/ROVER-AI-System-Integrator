@@ -69,8 +69,8 @@ app.get("/api/v1/system/info", (_req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.get("/api/v1/auth/me", authenticate, (req, res) => res.json({ user: req.user }));
-app.use("/api/v1/projects", authenticate, projectsRouter);
-app.use("/api/v1", authenticate, conversationsRouter);
+app.use("/api/v1/projects", projectsRouter);
+app.use("/api/v1", conversationsRouter);
 
 app.use((_req, res) => {
   res.status(404).json({ error: { code: "NOT_FOUND", message: "The requested resource was not found." } });
