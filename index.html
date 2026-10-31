@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#090f18">
-  <title>ROVER AI — System Integrator</title>
+  <meta name="theme-color" content="#070d16">
+  <title>ROVER AI — Nuclear Recycler Constructor</title>
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #070d15;
-      --bg-2: #0d1724;
-      --panel: rgba(17, 25, 37, 0.88);
-      --panel-strong: #101d2a;
-      --line: rgba(140, 167, 194, 0.2);
-      --line-strong: rgba(105, 176, 212, 0.35);
-      --text: #edf5ff;
-      --muted: #8da7bc;
-      --cyan: #5ee4de;
-      --blue: #70a5ff;
-      --green: #7be0a5;
-      --amber: #ffc978;
-      --purple: #9c8cff;
-      --red: #ff7e8e;
-      --shadow: 0 24px 60px rgba(3, 8, 14, 0.55);
-      --radius: 22px;
+      --bg: #050b12;
+      --bg-2: #0b1520;
+      --panel: rgba(10, 18, 28, 0.9);
+      --panel-strong: rgba(15, 25, 36, 0.96);
+      --line: rgba(132, 170, 202, 0.23);
+      --line-strong: rgba(77, 205, 255, 0.45);
+      --text: #eaf8ff;
+      --muted: #8ea8c0;
+      --cyan: #67e5ff;
+      --blue: #78a8ff;
+      --green: #7af5b2;
+      --amber: #f7be53;
+      --orange: #ff9e36;
+      --red: #ff7d7d;
+      --gold: #f7c35d;
+      --shadow: 0 26px 80px rgba(2, 8, 14, 0.7);
+      --radius: 18px;
     }
 
     * { box-sizing: border-box; }
@@ -32,1149 +32,1072 @@
       margin: 0;
       min-height: 100%;
       background:
-        radial-gradient(circle at top left, rgba(94, 228, 222, 0.15), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(112, 165, 255, 0.18), transparent 24%),
-        var(--bg);
+        radial-gradient(circle at top left, rgba(82, 219, 255, 0.12), transparent 22%),
+        radial-gradient(circle at top right, rgba(255, 174, 88, 0.10), transparent 28%),
+        linear-gradient(180deg, #040a10 0%, #070d15 100%);
       color: var(--text);
-      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
     body {
-      padding: 24px;
+      padding: 18px;
     }
 
-    button, input, textarea {
-      font: inherit;
-    }
-
-    .app-shell {
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      max-width: 1520px;
-      min-height: calc(100vh - 48px);
+    .page {
+      max-width: 1600px;
       margin: 0 auto;
-      border-radius: 28px;
-      overflow: hidden;
-      background: rgba(10, 17, 24, 0.9);
+      min-height: calc(100vh - 36px);
+      background: linear-gradient(180deg, rgba(7, 13, 22, 0.9), rgba(8, 14, 20, 0.96));
       border: 1px solid var(--line);
+      border-radius: 26px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+      overflow: hidden;
     }
 
-    .sidebar {
+    .topbar {
+      display: grid;
+      grid-template-columns: 1.3fr 1.1fr 0.8fr;
+      gap: 18px;
+      padding: 22px 24px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      background: rgba(8, 13, 19, 0.72);
+    }
+
+    .headline {
+      padding-top: 2px;
+    }
+
+    .headline h1 {
+      margin: 0;
+      font-weight: 900;
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      font-size: clamp(2.1rem, 3vw, 4.2rem);
+    }
+
+    .headline .small {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      max-width: 42ch;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 10px 12px;
+      align-content: start;
+      padding-top: 8px;
+    }
+
+    .feature {
       display: flex;
-      flex-direction: column;
-      background: linear-gradient(180deg, rgba(9, 14, 22, 0.95), rgba(12, 18, 27, 0.98));
-      border-right: 1px solid var(--line);
-      padding: 24px 18px 18px;
+      gap: 10px;
+      align-items: flex-start;
+      min-height: 52px;
+      color: var(--text);
+      font-size: 0.9rem;
+      line-height: 1.25;
+      padding: 6px 4px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 8px 22px;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 20px;
-    }
-
-    .brand-mark {
+    .feature .icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
       display: grid;
       place-items: center;
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(94, 228, 222, 0.25), rgba(112, 165, 255, 0.25));
-      border: 1px solid var(--line-strong);
-      font-size: 1.5rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(103, 229, 255, 0.5);
+      background: rgba(103, 229, 255, 0.10);
       color: var(--cyan);
-      box-shadow: inset 0 0 18px rgba(94, 228, 222, 0.14);
+      font-size: 0.72rem;
+      font-weight: 700;
     }
 
-    .brand strong {
+    .feature strong {
       display: block;
-      font-size: 1.15rem;
-      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      line-height: 1.2;
+      color: var(--text);
     }
 
-    .brand small {
+    .feature span {
       display: block;
-      margin-top: 4px;
       color: var(--muted);
-      letter-spacing: 0.12em;
       font-size: 0.66rem;
+      margin-top: 3px;
+      letter-spacing: 0.02em;
     }
 
-    .nav {
+    .stats-panel {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 12px;
+      padding-top: 4px;
     }
 
-    .nav button {
+    .stats-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 10px;
-      padding: 12px 14px;
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 14px;
+      padding: 4px 0 6px;
+    }
+
+    .stats-header h2 {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.72rem;
       color: var(--muted);
-      cursor: pointer;
-      text-align: left;
-      transition: 0.2s ease;
-      font-weight: 600;
     }
 
-    .nav button span {
-      display: inline-grid;
-      place-items: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.05);
-      font-size: 0.8rem;
-      color: var(--cyan);
+    .tags {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
-    .nav button:hover,
-    .nav button.active {
-      background: linear-gradient(135deg, rgba(94, 228, 222, 0.12), rgba(112, 165, 255, 0.08));
-      border-color: var(--line-strong);
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
       color: var(--text);
-      transform: translateX(2px);
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .sidebar-footer {
-      margin-top: auto;
-      padding-top: 18px;
+    .tag .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(122,245,178,0.85);
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      padding: 12px 10px 11px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: clamp(1.2rem, 2vw, 1.8rem);
+      letter-spacing: -0.06em;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.64rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .content {
+      padding: 20px 24px 24px;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 0.95fr 2.2fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(15, 23, 33, 0.94), rgba(10, 17, 25, 0.96));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 14px 14px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .panel-title h3 {
+      margin: 0;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(103, 229, 255, 0.35);
+      color: var(--cyan);
+      background: rgba(103, 229, 255, 0.08);
+    }
+
+    .vehicle-scene {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 0;
+      overflow: hidden;
+      min-height: 420px;
+      background:
+        linear-gradient(180deg, rgba(8, 14, 20, 0.6), rgba(8, 14, 20, 0.34)),
+        radial-gradient(circle at center, rgba(87, 197, 255, 0.18), transparent 38%),
+        linear-gradient(180deg, #09151d 0%, #0d1d2d 100%);
+    }
+
+    .terrain {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 110px;
+      background:
+        linear-gradient(180deg, rgba(27,39,53,0.1), rgba(12,20,27,0.8)),
+        linear-gradient(135deg, rgba(140, 149, 150, 0.9), rgba(70, 82, 83, 0.8));
+      clip-path: polygon(0 30%, 16% 20%, 36% 28%, 54% 24%, 70% 34%, 100% 18%, 100% 100%, 0 100%);
+      border-top: 1px solid rgba(103, 229, 255, 0.25);
+    }
+
+    .truck {
+      position: relative;
+      width: min(90%, 930px);
+      height: 100%;
+      min-height: 360px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .truck .body {
+      position: absolute;
+      left: 50%;
+      bottom: 82px;
+      transform: translateX(-50%);
+      width: 82%;
+      height: 180px;
+      border-radius: 28px 28px 24px 20px;
+      background: linear-gradient(180deg, rgba(241, 172, 52, 0.96), rgba(182, 120, 22, 0.94));
+      border: 2px solid rgba(255,214,101,0.7);
+      box-shadow: inset 0 0 22px rgba(255, 205, 94, 0.25), 0 18px 26px rgba(0,0,0,0.3);
+    }
+
+    .truck .body::before {
+      content: "";
+      position: absolute;
+      inset: 16px 25px 24px 20px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(6, 15, 25, 0.9), rgba(11, 23, 35, 0.98));
+      border: 2px solid rgba(103, 229, 255, 0.3);
+      box-shadow: inset 0 0 18px rgba(103, 229, 255, 0.15);
+    }
+
+    .truck .body::after {
+      content: "";
+      position: absolute;
+      left: 12%; right: 12%; top: 16px; height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(252, 210, 96, 0.1), rgba(103,229,255,0.18), rgba(252, 210, 96, 0.1));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .truck .cab {
+      position: absolute;
+      left: 36%;
+      bottom: 148px;
+      width: 230px;
+      height: 112px;
+      border-radius: 22px 28px 18px 16px;
+      background: linear-gradient(180deg, rgba(255, 182, 52, 0.98), rgba(182, 120, 22, 0.95));
+      border: 2px solid rgba(255,214,101,0.7);
+      box-shadow: inset 0 0 16px rgba(255,255,255,0.13);
+    }
+
+    .truck .cab::before {
+      content: "";
+      position: absolute;
+      left: 18px; right: 26px; top: 20px; bottom: 12px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(3, 15, 28, 0.82), rgba(9, 30, 41, 0.96));
+      border: 2px solid rgba(103,229,255,0.3);
+    }
+
+    .truck .windows {
+      position: absolute;
+      left: 48px; right: 42px; top: 28px; height: 28px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(103,229,255,0.18), rgba(121,126,255,0.15));
+      border: 1px solid rgba(103,229,255,0.32);
+      box-shadow: 0 0 18px rgba(103,229,255,0.14);
+    }
+
+    .truck .wheel {
+      position: absolute;
+      bottom: 14px;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #1b2932 0 24%, #0b151d 26% 42%, #2d3c45 43% 60%, #101d27 61% 100%);
+      border: 4px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 0 24px rgba(0,0,0,0.38);
+    }
+
+    .truck .wheel::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: 50%;
+      border: 3px solid rgba(103,229,255,0.9);
+      box-shadow: 0 0 18px rgba(103,229,255,0.4);
+    }
+
+    .truck .wheel.front { left: 22%; }
+    .truck .wheel.mid1 { left: 42%; }
+    .truck .wheel.mid2 { left: 58%; }
+    .truck .wheel.rear { left: 75%; }
+
+    .truck .arm {
+      position: absolute;
+      left: 64%;
+      bottom: 224px;
+      width: 250px;
+      height: 18px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(255,202,82,0.96), rgba(126, 145, 157, 0.8));
+      transform: rotate(12deg);
+      transform-origin: left center;
+      box-shadow: 0 0 18px rgba(255, 184, 75, 0.15);
+    }
+
+    .truck .arm::before {
+      content: "";
+      position: absolute;
+      right: -28px; top: -10px;
+      width: 40px; height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 202, 82, 0.96), rgba(126,145,157,0.75));
+      border: 1px solid rgba(255,255,255,0.16);
+      transform: rotate(18deg);
+    }
+
+    .truck .arm::after {
+      content: "";
+      position: absolute;
+      right: -76px; top: 2px;
+      width: 110px; height: 12px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(255,220,110,0.9), rgba(103,229,255,0.55));
+      box-shadow: 0 0 18px rgba(103,229,255,0.22);
+    }
+
+    .truck .grapple {
+      position: absolute;
+      right: 13%;
+      bottom: 220px;
+      width: 120px;
+      height: 110px;
+      border-radius: 18px 18px 10px 10px;
+      background: linear-gradient(180deg, rgba(14,25,36,0.95), rgba(25,36,46,0.94));
+      border: 2px solid rgba(103,229,255,0.35);
+      transform: rotate(-8deg);
+    }
+
+    .truck .grapple::before,
+    .truck .grapple::after {
+      content: "";
+      position: absolute;
+      inset: 12px 12px auto 12px;
+      height: 18px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(255,201,93,0.9), rgba(103,229,255,0.65));
+    }
+
+    .truck .grapple::after {
+      inset: auto 12px 12px 12px;
+      height: 22px;
+    }
+
+    .scrap {
+      position: absolute;
+      bottom: 18px;
+      width: 180px;
+      height: 84px;
+      background: linear-gradient(135deg, rgba(170,170,170,0.7), rgba(84, 92, 100, 0.85));
+      border-radius: 20px 30px 18px 22px;
+      filter: blur(0.2px);
+      box-shadow: inset -10px -12px 18px rgba(0,0,0,0.2);
+    }
+
+    .scrap.left { left: 8%; transform: rotate(-3deg); }
+    .scrap.right { right: 8%; transform: rotate(3deg); }
+
+    .scrap::before, .scrap::after {
+      content: "";
+      position: absolute;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .scrap::before {
+      width: 42px; height: 42px; left: 16px; top: 14px;
+      box-shadow: 44px 20px 0 rgba(255,255,255,0.08), 86px 18px 0 rgba(255,255,255,0.09);
+    }
+
+    .scrap::after {
+      inset: auto 18px 14px auto; width: 52px; height: 24px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .scene-badges {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .scene-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: rgba(4, 9, 14, 0.56);
+      border: 1px solid rgba(103,229,255,0.25);
+      border-radius: 999px;
+      color: var(--text);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+
+    .scene-badge .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px rgba(103,229,255,.8);
+    }
+
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 12px;
     }
 
     .mini-card {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.02);
+      padding: 12px 12px 10px;
+      border-radius: 14px;
       border: 1px solid var(--line);
-    }
-
-    .mini-card .label {
-      display: block;
-      color: var(--muted);
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
+      background: rgba(255,255,255,0.015);
     }
 
     .mini-card strong {
       display: block;
-      font-size: 1.02rem;
+      font-size: 1.65rem;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      margin: 6px 0 0;
       color: var(--green);
     }
 
-    .main-panel {
-      padding: 26px 30px 32px;
-      overflow: auto;
-      background: rgba(8, 14, 20, 0.9);
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 24px;
-    }
-
-    .eyebrow {
-      margin: 0 0 8px;
+    .mini-card span {
       color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.7rem;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(1.7rem, 2vw, 2.5rem);
-      letter-spacing: -0.04em;
-    }
-
-    .status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      background: rgba(94, 228, 222, 0.08);
-      color: var(--text);
-      font-size: 0.82rem;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 12px rgba(123, 224, 165, 0.8);
-    }
-
-    .view {
-      display: none;
-      animation: fadeIn 0.24s ease;
-    }
-
-    .view.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(3px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .grid {
-      display: grid;
-      gap: 18px;
-    }
-
-    .stats {
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      margin-bottom: 18px;
-    }
-
-    .stat {
-      padding: 20px 18px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(18, 28, 40, 0.9), rgba(14, 22, 31, 0.92));
-      border: 1px solid var(--line);
-    }
-
-    .stat small {
-      display: block;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 0.68rem;
-    }
-
-    .num {
-      margin: 10px 0 8px;
-      font-size: clamp(2rem, 3vw, 2.6rem);
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: -0.06em;
-    }
-
-    .two-col {
-      grid-template-columns: 1.2fr 0.8fr;
-    }
-
-    .panel {
-      padding: 20px 20px 18px;
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(15, 24, 35, 0.95), rgba(12, 20, 30, 0.96));
-      border: 1px solid var(--line);
-    }
-
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    h2, h3 {
-      margin: 0;
-      letter-spacing: -0.04em;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border: 1px solid var(--line);
-    }
-
-    .badge.ok { background: rgba(123, 224, 165, 0.08); color: var(--green); }
-    .badge.neutral { background: rgba(112, 165, 255, 0.08); color: var(--blue); }
-    .badge.warn { background: rgba(255, 201, 120, 0.08); color: var(--amber); }
-
-    .hero-copy {
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.6;
-      max-width: 60ch;
-    }
-
-    .kpi-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(120px, 1fr));
-      gap: 12px;
-    }
-
-    .kpi {
-      padding: 14px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--line);
-    }
-
-    .kpi strong {
-      display: block;
-      font-size: 1.2rem;
-      margin-top: 8px;
-      letter-spacing: -0.05em;
-    }
-
-    .kpi span {
-      color: var(--muted);
-      font-size: 0.72rem;
+      font-size: 0.64rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .roadmap {
+    .toggle-list {
       display: grid;
       gap: 10px;
-      margin: 12px 0 16px;
-    }
-
-    .road-step {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.02);
-      color: var(--muted);
-      transition: 0.2s ease;
-    }
-
-    .road-step.active {
-      border-color: var(--line-strong);
-      background: rgba(94, 228, 222, 0.08);
-      color: var(--text);
-    }
-
-    .road-step span {
-      display: inline-grid;
-      place-items: center;
-      width: 30px;
-      height: 30px;
-      background: rgba(112, 165, 255, 0.12);
-      border-radius: 10px;
-      color: var(--cyan);
-      font-weight: 700;
-      font-size: 0.76rem;
-    }
-
-    .button-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
       margin-top: 6px;
     }
 
-    .btn {
-      border: 1px solid transparent;
-      border-radius: 12px;
-      padding: 11px 16px;
-      cursor: pointer;
-      transition: 0.2s ease;
-      font-weight: 600;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .btn-primary {
-      color: #061218;
-      background: linear-gradient(135deg, var(--cyan), #9ae8de);
-      box-shadow: 0 14px 32px rgba(94, 228, 222, 0.25);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.02);
-      border-color: var(--line);
-      color: var(--text);
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    .table-wrap {
-      overflow: auto;
-      border-radius: 14px;
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 10px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,0.02);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 540px;
-    }
-
-    th, td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-    }
-
-    th {
-      font-size: 0.7rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      background: rgba(255,255,255,0.02);
-    }
-
-    td {
       color: var(--text);
+      font-size: 0.71rem;
+      line-height: 1.4;
     }
 
-    .status-pill {
-      display: inline-flex;
-      padding: 6px 8px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .toggle-item .bulb {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(103,229,255,1) 0 32%, rgba(66,131,170,0.8) 33% 100%);
+      box-shadow: 0 0 16px rgba(103,229,255,0.5);
+      flex-shrink: 0;
     }
 
-    .status-pill.ready { background: rgba(123, 224, 165, 0.1); color: var(--green); }
-    .status-pill.test { background: rgba(255, 201, 120, 0.1); color: var(--amber); }
-    .status-pill.plan { background: rgba(156, 140, 255, 0.12); color: var(--purple); }
-
-    .assistant-layout {
+    .steps-wrap {
+      margin-top: 18px;
       display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.7fr);
+      grid-template-columns: 1.4fr 0.8fr;
       gap: 18px;
     }
 
-    .chat-window {
-      max-height: 430px;
-      overflow: auto;
+    .stepper {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(7, 12, 17, 0.75);
-    }
-
-    .message {
-      max-width: 82%;
-      padding: 12px 14px;
-      border-radius: 14px;
-      line-height: 1.55;
-      border: 1px solid transparent;
-    }
-
-    .message.user {
-      align-self: flex-end;
-      background: rgba(112, 165, 255, 0.12);
-      border-color: rgba(112,165,255,0.2);
-    }
-
-    .message.bot {
-      align-self: flex-start;
-      background: rgba(255,255,255,0.02);
-      border-color: var(--line);
-    }
-
-    .prompt-box {
-      display: flex;
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 8px;
     }
 
-    textarea {
-      flex: 1;
-      min-height: 58px;
-      max-height: 120px;
-      resize: vertical;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255,255,255,0.02);
-      color: var(--text);
-      padding: 12px 14px;
-      outline: none;
-    }
-
-    textarea:focus,
-    input:focus {
-      border-color: var(--line-strong);
-      box-shadow: 0 0 0 3px rgba(94, 228, 222, 0.08);
-    }
-
-    .hint-list {
-      list-style: none;
-      padding: 0;
-      margin: 16px 0 0;
+    .step {
       display: grid;
-      gap: 10px;
-    }
-
-    .hint-list li {
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .file-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .file-input {
-      display: inline-flex;
+      grid-template-columns: 54px 1fr auto;
       align-items: center;
       gap: 10px;
       padding: 10px 12px;
       border: 1px solid var(--line);
       border-radius: 12px;
-      background: rgba(255,255,255,0.02);
-      cursor: pointer;
+      background: rgba(255,255,255,0.015);
+      color: var(--muted);
+      min-height: 56px;
+    }
+
+    .step.active {
+      border-color: rgba(103,229,255,0.45);
+      background: linear-gradient(90deg, rgba(103,229,255,0.08), rgba(255,255,255,0.02));
       color: var(--text);
     }
 
-    .file-input input {
-      display: none;
-    }
-
-    .robot-grid {
+    .step .num {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(240px, 0.8fr);
-      gap: 18px;
+      place-items: center;
+      width: 30px; height: 30px;
+      border-radius: 10px;
+      background: rgba(103,229,255,0.08);
+      border: 1px solid rgba(103,229,255,0.35);
+      color: var(--cyan);
+      font-size: 0.74rem;
+      font-weight: 800;
     }
 
-    .robot-state {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.02);
-      margin-bottom: 14px;
+    .step .txt {
+      font-size: 0.79rem;
+      letter-spacing: 0.02em;
     }
 
-    .robot-state strong {
-      display: block;
-      font-size: 1.5rem;
-      letter-spacing: -0.06em;
+    .step .arrow {
+      font-size: 1.1rem;
+      color: var(--muted);
     }
 
-    .robot-state .state-ok { color: var(--green); }
-    .robot-state .state-warn { color: var(--amber); }
-    .robot-state .state-off { color: var(--muted); }
-
-    .robot-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
+    .result-box {
+      display: grid;
+      gap: 12px;
+      align-content: start;
     }
 
-    .log-box {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-height: 230px;
-      padding: 12px 14px;
+    .result-card {
+      padding: 14px 12px;
       border-radius: 14px;
       border: 1px solid var(--line);
-      background: rgba(4, 9, 14, 0.85);
-      color: #dfeefd;
-      font-family: "SFMono-Regular", Consolas, monospace;
-      font-size: 0.82rem;
-      line-height: 1.5;
-      white-space: pre-wrap;
+      background: rgba(255,255,255,0.02);
     }
 
-    .settings-grid {
+    .result-card h4 {
+      margin: 0 0 10px;
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .result-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .result-item {
+      padding: 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      text-align: center;
+    }
+
+    .result-item .icon-box {
+      width: 54px; height: 54px; margin: 0 auto 8px;
+      border-radius: 12px;
+      display: grid; place-items: center;
+      background: linear-gradient(180deg, rgba(103,229,255,0.12), rgba(255,255,255,0.02));
+      border: 1px solid rgba(103,229,255,0.2);
+      color: var(--cyan);
+      font-weight: 800;
+    }
+
+    .result-item strong {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .row-cards {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card-tiles {
+      background: linear-gradient(180deg, rgba(10,20,30,0.92), rgba(9,16,24,0.96));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 12px 12px;
+      min-height: 210px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-tiles h4 {
+      margin: 0 0 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .device-visual {
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid rgba(103,229,255,0.25);
+      background: radial-gradient(circle at center, rgba(103,229,255,0.18), rgba(9,24,32,0.9) 55%);
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .device-visual::before {
+      content: "";
+      width: 72%; height: 72%; border-radius: 50%;
+      border: 8px solid rgba(103,229,255,0.6);
+      box-shadow: inset 0 0 24px rgba(103,229,255,0.28), 0 0 36px rgba(103,229,255,0.18);
+    }
+
+    .device-visual::after {
+      content: "";
+      position: absolute; inset: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .rotor {
+      position: absolute;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(103,229,255,0.2), rgba(103,229,255,0.8), rgba(103,229,255,0.18), rgba(103,229,255,0.2));
+      filter: blur(0.5px);
+      transform: rotate(18deg);
+    }
+
+    .mini-caption {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .bottom-band {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.1fr 1.1fr 0.9fr;
       gap: 18px;
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .field label {
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-    }
-
-    .field input {
-      width: 100%;
+    .info-card {
       border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.02);
-      color: var(--text);
-      padding: 12px 14px;
-      outline: none;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(11,19,28,0.96), rgba(8,14,21,0.96));
+      padding: 14px 14px 12px;
+      min-height: 170px;
     }
 
-    @media (max-width: 980px) {
-      body {
-        padding: 0;
-      }
+    .info-card h4 {
+      margin: 0 0 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-      .app-shell {
-        grid-template-columns: 1fr;
-        min-height: 100vh;
-        border-radius: 0;
-      }
+    .info-card ul {
+      margin: 0; padding-left: 18px; color: var(--text);
+      display: grid; gap: 8px;
+      font-size: 0.84rem; line-height: 1.4;
+    }
 
-      .sidebar {
-        border-right: none;
-        border-bottom: 1px solid var(--line);
-      }
+    .info-card .glass {
+      display: block; width: 100%; height: 96px; margin-top: 10px;
+      border-radius: 14px; border: 1px solid rgba(103,229,255,0.3);
+      background: linear-gradient(180deg, rgba(8,18,27,0.9), rgba(14,27,38,0.95));
+      position: relative; overflow: hidden;
+    }
 
-      .main-panel {
-        padding: 18px 16px 24px;
-      }
+    .info-card .glass::before {
+      content: ""; position: absolute; inset: 12px;
+      border-radius: 12px; background: linear-gradient(90deg, rgba(103,229,255,0.14), rgba(255,255,255,0.02), rgba(103,229,255,0.12));
+      border: 1px solid rgba(103,229,255,0.18);
+      box-shadow: inset 0 0 16px rgba(103,229,255,0.08);
+    }
 
-      .two-col,
-      .assistant-layout,
-      .robot-grid,
-      .settings-grid {
-        grid-template-columns: 1fr;
-      }
+    .cta {
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      min-height: 170px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(18, 32, 42, 0.96), rgba(8, 15, 22, 0.98));
+      border: 1px solid var(--line);
+      padding: 16px;
+    }
 
+    .cta-box {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(122, 245, 178, 0.28);
+      background: rgba(122, 245, 178, 0.05);
+      color: var(--green);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1200px) {
       .topbar {
-        align-items: flex-start;
-        flex-direction: column;
+        grid-template-columns: 1fr;
       }
+
+      .hero-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-wrap,
+      .bottom-band,
+      .row-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body { padding: 10px; }
+      .page { border-radius: 18px; }
+      .content, .topbar { padding-left: 14px; padding-right: 14px; }
+      .feature-list { grid-template-columns: 1fr; }
+      .status-grid { grid-template-columns: 1fr 1fr; }
+      .steps-wrap, .bottom-band, .row-cards { grid-template-columns: 1fr; }
+      .truck .body { width: 92%; }
+      .truck .cab { left: 28%; width: 200px; }
     }
   </style>
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">⌁</div>
-        <div>
-          <strong>ROVER AI</strong>
-          <small>SYSTEM INTEGRATOR</small>
+  <div class="page">
+    <header class="topbar">
+      <div class="headline">
+        <h1>Автоутилизатор<br>на ядерном двигателе</h1>
+        <div class="small">Чистое будущее. Безопасная утилизация. Экология. Энергия. Технологии.</div>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature">
+          <div class="icon">☢</div>
+          <div>
+            <strong>Ядерный двигатель</strong>
+            <span>Высокая автономность</span>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="icon">⚡</div>
+          <div>
+            <strong>Электрогенерация</strong>
+            <span>Энергия для систем</span>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="icon">♻</div>
+          <div>
+            <strong>Экологическая утилизация</strong>
+            <span>Меньше отходов</span>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="icon">🧠</div>
+          <div>
+            <strong>Автономное управление</strong>
+            <span>ИИ и навигация</span>
+          </div>
         </div>
       </div>
 
-      <nav class="nav" id="nav">
-        <button class="active" data-view="overview"><span>◈</span>Обзор</button>
-        <button data-view="architecture"><span>▣</span>Архитектура</button>
-        <button data-view="modules"><span>⌘</span>Модули</button>
-        <button data-view="assistant"><span>✦</span>AI Assistant</button>
-        <button data-view="files"><span>▤</span>Файлы</button>
-        <button data-view="robots"><span>⟡</span>Роботы</button>
-        <button data-view="settings"><span>⚙</span>Настройки</button>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="mini-card">
-          <span class="label">Статус</span>
-          <strong>Demo / Local</strong>
+      <div class="stats-panel">
+        <div class="stats-header">
+          <h2>Полный цикл</h2>
+          <div class="tags">
+            <span class="tag"><span class="dot"></span>Онлайн</span>
+          </div>
+        </div>
+        <div class="status-grid">
+          <div class="metric">
+            <strong>34</strong>
+            <span>до 300 км</span>
+          </div>
+          <div class="metric">
+            <strong>99</strong>
+            <span>энергии</span>
+          </div>
+          <div class="metric">
+            <strong>0%</strong>
+            <span>выбросов</span>
+          </div>
         </div>
       </div>
-    </aside>
+    </header>
 
-    <main class="main-panel">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Панель управления</p>
-          <h1 id="pageTitle">Панель системного интегратора</h1>
-        </div>
-        <div class="status-chip"><span class="dot"></span>Local prototype</div>
-      </header>
-
-      <section class="view active" id="overview">
-        <div class="grid stats">
-          <article class="stat">
-            <small>Модули</small>
-            <div class="num">06</div>
-            <small>архитектура определена</small>
-          </article>
-          <article class="stat">
-            <small>Этапы</small>
-            <div class="num">05</div>
-            <small>план внедрения</small>
-          </article>
-          <article class="stat">
-            <small>Сценарии</small>
-            <div class="num">12</div>
-            <small>доступно в демо</small>
-          </article>
-          <article class="stat">
-            <small>Доступ</small>
-            <div class="num">99%</div>
-            <small>локальный режим</small>
-          </article>
-        </div>
-
-        <div class="grid two-col">
-          <section class="panel">
-            <div class="panel-head">
-              <h2>Состояние платформы</h2>
-              <span class="badge ok">В рабочем режиме</span>
+    <main class="content">
+      <section class="hero-wrap">
+        <aside class="panel side-panel">
+          <div class="panel-title">
+            <h3>Статус системы</h3>
+            <span class="chip">Цикл</span>
+          </div>
+          <div class="side-stack">
+            <div class="mini-card">
+              <span>Сбор</span>
+              <strong>99%</strong>
             </div>
-            <p class="hero-copy">
-              Платформа поддерживает локальный цикл управления проектом, графическую навигацию по архитектуре,
-              демонстрацию ассистента, загрузку файлов и симуляцию команд робота. Интерфейс оптимизирован под
-              быстрый обзор и навигацию в условиях раннего прототипа.
-            </p>
-            <div class="kpi-row">
-              <div class="kpi">
-                <span>Latency</span>
-                <strong>34 ms</strong>
+            <div class="mini-card">
+              <span>Ресайклинг</span>
+              <strong>94%</strong>
+            </div>
+            <div class="mini-card">
+              <span>Безопасность</span>
+              <strong>100%</strong>
+            </div>
+          </div>
+          <div class="toggle-list">
+            <div class="toggle-item"><span class="bulb"></span>Машина захватывает автотранспорт</div>
+            <div class="toggle-item"><span class="bulb"></span>Шредер измельчает материалы</div>
+            <div class="toggle-item"><span class="bulb"></span>Резак разделяет фрагменты</div>
+            <div class="toggle-item"><span class="bulb"></span>Трамбовка подготавливает сырьё</div>
+          </div>
+        </aside>
+
+        <div class="panel vehicle-scene">
+          <div class="scene-badges">
+            <span class="scene-badge"><span class="dot"></span>Машина</span>
+            <span class="scene-badge"><span class="dot"></span>Восстановление</span>
+          </div>
+          <div class="truck" aria-label="Космический транспорт для переработки авто">
+            <div class="scrap left"></div>
+            <div class="scrap right"></div>
+            <div class="body"></div>
+            <div class="cab">
+              <div class="windows"></div>
+            </div>
+            <div class="wheel front"></div>
+            <div class="wheel mid1"></div>
+            <div class="wheel mid2"></div>
+            <div class="wheel rear"></div>
+            <div class="arm"></div>
+            <div class="grapple"></div>
+          </div>
+          <div class="terrain"></div>
+        </div>
+
+        <aside class="panel side-panel">
+          <div class="panel-title">
+            <h3>Параметры</h3>
+            <span class="chip">Итог</span>
+          </div>
+          <div class="side-stack">
+            <div class="mini-card">
+              <span>Автономность</span>
+              <strong>97%</strong>
+            </div>
+            <div class="mini-card">
+              <span>Утилизация</span>
+              <strong>89%</strong>
+            </div>
+            <div class="mini-card">
+              <span>Выбросы</span>
+              <strong>0%</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="steps-wrap">
+        <div class="panel">
+          <div class="panel-title">
+            <h3>Как это работает?</h3>
+            <span class="chip">6 шагов</span>
+          </div>
+          <div class="stepper">
+            <div class="step active">
+              <div class="num">1</div>
+              <div class="txt">Погрузка</div>
+              <div class="arrow">→</div>
+            </div>
+            <div class="step">
+              <div class="num">2</div>
+              <div class="txt">Шредер</div>
+              <div class="arrow">→</div>
+            </div>
+            <div class="step">
+              <div class="num">3</div>
+              <div class="txt">Резак</div>
+              <div class="arrow">→</div>
+            </div>
+            <div class="step">
+              <div class="num">4</div>
+              <div class="txt">Трамбовка</div>
+              <div class="arrow">→</div>
+            </div>
+            <div class="step">
+              <div class="num">5</div>
+              <div class="txt">Сортировка</div>
+              <div class="arrow">→</div>
+            </div>
+            <div class="step">
+              <div class="num">6</div>
+              <div class="txt">Переработка</div>
+              <div class="arrow">→</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-box">
+          <div class="panel result-card">
+            <h4>Результат</h4>
+            <div class="result-grid">
+              <div class="result-item">
+                <div class="icon-box">△</div>
+                <strong>Металл</strong>
               </div>
-              <div class="kpi">
-                <span>Синхронизация</span>
-                <strong>98.2%</strong>
+              <div class="result-item">
+                <div class="icon-box">◈</div>
+                <strong>Пластик</strong>
               </div>
-              <div class="kpi">
-                <span>Сценариев</span>
-                <strong>12</strong>
+              <div class="result-item">
+                <div class="icon-box">◍</div>
+                <strong>Стекло</strong>
+              </div>
+              <div class="result-item">
+                <div class="icon-box">▣</div>
+                <strong>Резина</strong>
               </div>
             </div>
-          </section>
-
-          <section class="panel">
-            <div class="panel-head">
-              <h2>План внедрения</h2>
-              <span class="badge neutral">5 шагов</span>
-            </div>
-            <div class="roadmap" id="road">
-              <div class="road-step active"><span>01</span>Проверка системы</div>
-              <div class="road-step"><span>02</span>Интеграция модулей</div>
-              <div class="road-step"><span>03</span>Интеллектуальный ассистент</div>
-              <div class="road-step"><span>04</span>Сбор данных и схем</div>
-              <div class="road-step"><span>05</span>Запуск автономных сценариев</div>
-            </div>
-            <div class="button-row">
-              <button class="btn btn-primary" id="advance">Следующий этап</button>
-              <span class="muted" id="done">1 / 5</span>
-            </div>
-          </section>
+          </div>
         </div>
       </section>
 
-      <section class="view" id="architecture">
-        <section class="panel">
-          <div class="panel-head">
-            <h2>Компоненты и ответственность</h2>
-            <span class="badge neutral">System map</span>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Компонент</th>
-                  <th>Назначение</th>
-                  <th>Ответственность</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>ROVER AI Client</td>
-                  <td>Визуальный интерфейс и управление</td>
-                  <td>UI, состояние, сценарии</td>
-                </tr>
-                <tr>
-                  <td>API Gateway</td>
-                  <td>Обмен данными с сервисами</td>
-                  <td>Авторизация, маршрутизация</td>
-                </tr>
-                <tr>
-                  <td>AI Orchestrator</td>
-                  <td>Управление задачами и контекстом</td>
-                  <td>Семантическая маршрутизация</td>
-                </tr>
-                <tr>
-                  <td>Telemetry Layer</td>
-                  <td>Сбор и визуализация данных</td>
-                  <td>Логи, метрики, события</td>
-                </tr>
-                <tr>
-                  <td>Device Gateway</td>
-                  <td>Управление роботами и устройствами</td>
-                  <td>Команды, мониторинг</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </section>
-
-      <section class="view" id="modules">
-        <section class="panel">
-          <div class="panel-head">
-            <h2>Реестр модулей</h2>
-            <span class="badge neutral">06 modules</span>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Модуль</th>
-                  <th>Функция</th>
-                  <th>Состояние</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Core Planner</td>
-                  <td>Планирование сценариев и задач</td>
-                  <td><span class="status-pill ready">ready</span></td>
-                </tr>
-                <tr>
-                  <td>Context Memory</td>
-                  <td>Хранение контекста и сессий</td>
-                  <td><span class="status-pill test">test</span></td>
-                </tr>
-                <tr>
-                  <td>Command Runtime</td>
-                  <td>Исполнение неподтверждённых действий</td>
-                  <td><span class="status-pill plan">plan</span></td>
-                </tr>
-                <tr>
-                  <td>File Integrator</td>
-                  <td>Сбор, анализ и сопоставление материалов</td>
-                  <td><span class="status-pill ready">ready</span></td>
-                </tr>
-                <tr>
-                  <td>Robot Adapter</td>
-                  <td>Связь с устройствами и сенсорами</td>
-                  <td><span class="status-pill test">test</span></td>
-                </tr>
-                <tr>
-                  <td>Safety Gate</td>
-                  <td>Проверка команд и политик доступа</td>
-                  <td><span class="status-pill plan">plan</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </section>
-
-      <section class="view" id="assistant">
-        <div class="assistant-layout">
-          <section class="panel">
-            <div class="panel-head">
-              <h2>ROVER AI Assistant</h2>
-              <span class="badge neutral">Локальный режим</span>
-            </div>
-
-            <div class="chat-window" id="chat">
-              <div class="message bot">Привет! Я симулятор AI-ассистента. Задайте вопрос по системе, маршруту интеграции или безопасности.</div>
-            </div>
-
-            <div class="prompt-box">
-              <textarea id="prompt" placeholder="Введите запрос..."></textarea>
-              <button class="btn btn-primary" id="send">Отправить</button>
-            </div>
-          </section>
-
-          <aside class="panel">
-            <h3>Подсказки</h3>
-            <ul class="hint-list">
-              <li>Сформулируйте задачу по архитектуре, интеграции или управлению роботом.</li>
-              <li>Запросите анализ безопасности перед запуском критической команды.</li>
-              <li>Проверьте корректность схем и объектов в разделе файлов.</li>
-            </ul>
-          </aside>
+      <section class="row-cards">
+        <div class="card-tiles">
+          <h4>Ядерный реактор</h4>
+          <div class="device-visual"><div class="rotor"></div></div>
+          <div class="mini-caption">Тепловая энергия для работы комплекса и автономной тяги.</div>
+        </div>
+        <div class="card-tiles">
+          <h4>Шредер</h4>
+          <div class="device-visual"><div class="rotor"></div></div>
+          <div class="mini-caption">Дробление кузовов и деталей в контролируемую фракцию.</div>
+        </div>
+        <div class="card-tiles">
+          <h4>Резак</h4>
+          <div class="device-visual"><div class="rotor"></div></div>
+          <div class="mini-caption">Точное разделение материалов на полуфабрикаты.</div>
+        </div>
+        <div class="card-tiles">
+          <h4>Трамбовка</h4>
+          <div class="device-visual"><div class="rotor"></div></div>
+          <div class="mini-caption">Компактное хранение и сортировка вторсырья.</div>
         </div>
       </section>
 
-      <section class="view" id="files">
-        <section class="panel">
-          <div class="file-toolbar">
-            <div class="panel-head" style="margin:0;">
-              <h2>Файлы и схемы</h2>
-              <span class="badge neutral">Browser local</span>
-            </div>
-            <label class="file-input" for="upload">
-              <input id="upload" type="file" multiple>
-              <span>Выбрать файлы</span>
-            </label>
-          </div>
-
-          <div class="table-wrap" style="margin-top: 12px;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Имя файла</th>
-                  <th>Тип</th>
-                  <th>Размер</th>
-                </tr>
-              </thead>
-              <tbody id="filelist">
-                <tr>
-                  <td colspan="3" class="muted">Файлы ещё не загружены</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </section>
-
-      <section class="view" id="robots">
-        <div class="robot-grid">
-          <section class="panel">
-            <div class="panel-head">
-              <h2>Состояние платформы</h2>
-              <span class="badge ok">SIMULATOR</span>
-            </div>
-
-            <div class="robot-state">
-              <div>
-                <span class="muted">Статус бота</span>
-                <strong id="robotState" class="state-ok">ONLINE</strong>
-              </div>
-              <span class="badge neutral">Ready</span>
-            </div>
-
-            <div class="robot-actions">
-              <button class="btn btn-primary" id="start">Запуск</button>
-              <button class="btn btn-secondary" id="pause">Пауза</button>
-            </div>
-          </section>
-
-          <section class="panel">
-            <div class="panel-head">
-              <h2>Лог действий</h2>
-              <span class="badge neutral">Live</span>
-            </div>
-            <div class="log-box" id="robotLog">
-              12:45 — Система инициализирована
-              12:46 — Сценарий готов к запуску
-            </div>
-          </section>
+      <section class="bottom-band">
+        <div class="info-card">
+          <h4>Кабина управления</h4>
+          <ul>
+            <li>Полный автопилот</li>
+            <li>ИИ-ассистент</li>
+            <li>Мониторинг всех режимов</li>
+          </ul>
+          <span class="glass"></span>
         </div>
-      </section>
 
-      <section class="view" id="settings">
-        <section class="panel">
-          <div class="panel-head">
-            <h2>Настройки проекта</h2>
-            <span class="badge neutral">Local storage</span>
-          </div>
+        <div class="info-card">
+          <h4>Шредер</h4>
+          <ul>
+            <li>Мгновенное измельчение</li>
+            <li>Модули под любой тип металла</li>
+            <li>Малый уровень потерь</li>
+          </ul>
+          <span class="glass"></span>
+        </div>
 
-          <div class="settings-grid">
-            <div class="field">
-              <label for="projectName">Название проекта</label>
-              <input id="projectName" type="text" value="ROVER AI System Integrator">
-            </div>
-            <div class="field">
-              <label for="apiUrl">API URL</label>
-              <input id="apiUrl" type="text" value="https://api.example.internal/v1">
-            </div>
-            <div class="field">
-              <label for="modelName">Модель</label>
-              <input id="modelName" type="text" value="Local demo model">
-            </div>
-            <div class="field">
-              <label for="region">Регион</label>
-              <input id="region" type="text" value="eu-central-1">
-            </div>
-          </div>
+        <div class="info-card">
+          <h4>Резак</h4>
+          <ul>
+            <li>Высокая точность</li>
+            <li>Стабильная энергия</li>
+            <li>Поддержка тяжелых фракций</li>
+          </ul>
+          <span class="glass"></span>
+        </div>
 
-          <div class="button-row" style="margin-top: 18px;">
-            <button class="btn btn-primary" id="save">Сохранить</button>
-            <button class="btn btn-secondary" id="reset">Сбросить</button>
-          </div>
-        </section>
+        <div class="cta">
+          <div class="cta-box">Чистая планета<br>без отходов</div>
+        </div>
       </section>
     </main>
   </div>
-
-  <script>
-    const names = {
-      overview: 'Панель системного интегратора',
-      architecture: 'Архитектура системы',
-      modules: 'Реестр модулей',
-      assistant: 'AI Assistant',
-      files: 'Файлы и схемы',
-      robots: 'Роботы и симулятор',
-      settings: 'Настройки проекта'
-    };
-
-    const pageTitle = document.getElementById('pageTitle');
-    const navButtons = document.querySelectorAll('#nav button');
-    const views = document.querySelectorAll('.view');
-
-    function setActiveView(viewName) {
-      navButtons.forEach((button) => {
-        button.classList.toggle('active', button.dataset.view === viewName);
-      });
-
-      views.forEach((view) => {
-        view.classList.toggle('active', view.id === viewName);
-      });
-
-      pageTitle.textContent = names[viewName] || 'Панель системного интегратора';
-    }
-
-    navButtons.forEach((button) => {
-      button.addEventListener('click', () => setActiveView(button.dataset.view));
-    });
-
-    let stage = 1;
-    const roadSteps = Array.from(document.querySelectorAll('#road .road-step'));
-    const done = document.getElementById('done');
-
-    document.getElementById('advance').addEventListener('click', () => {
-      stage = Math.min(stage + 1, 5);
-      roadSteps.forEach((step, index) => {
-        step.classList.toggle('active', index < stage);
-      });
-      done.textContent = stage + ' / 5';
-    });
-
-    function addMessage(role, text) {
-      const message = document.createElement('div');
-      message.className = 'message ' + role;
-      message.textContent = text;
-      document.getElementById('chat').appendChild(message);
-      const chat = document.getElementById('chat');
-      chat.scrollTop = chat.scrollHeight;
-    }
-
-    document.getElementById('send').addEventListener('click', () => {
-      const prompt = document.getElementById('prompt').value.trim();
-      if (!prompt) return;
-
-      addMessage('user', prompt);
-      const response = buildAssistantReply(prompt);
-      setTimeout(() => addMessage('bot', response), 180);
-      document.getElementById('prompt').value = '';
-    });
-
-    function buildAssistantReply(prompt) {
-      const text = prompt.toLowerCase();
-
-      if (text.includes('архитект') || text.includes('структур')) {
-        return 'Архитектура построена по модели клиент → API gateway → AI orchestrator → data layer + device gateway. Основной акцент — безопасная маршрутизация задач и прозрачный контроль команд.';
-      }
-
-      if (text.includes('робот') || text.includes('команд')) {
-        return 'Команды робота проходят через безопасный шлюз с проверкой режима выполнения. Для критичных сценариев рекомендуется обязательная валидация и двухэтапное подтверждение.';
-      }
-
-      if (text.includes('файл') || text.includes('схем')) {
-        return 'Файлы можно загружать в локальный интерфейс и быстро оценивать их тип, размер и назначение. Для следующих шагов удобно использовать схему данных как входной контракт.';
-      }
-
-      if (text.includes('модул') || text.includes('интегра')) {
-        return 'Наиболее приоритетны модули Core Planner, File Integrator и Safety Gate. Они закрывают ключевые точки для автоматизации и контроля.';
-      }
-
-      return 'Сценарий принято к обработке. Для более точного анализа укажите область: архитектура, интеграция, безопасность, робототехника или файлы.';
-    }
-
-    document.getElementById('upload').addEventListener('change', (event) => {
-      const files = Array.from(event.target.files || []);
-      const table = document.getElementById('filelist');
-
-      table.innerHTML = '';
-
-      if (!files.length) {
-        table.innerHTML = '<tr><td colspan="3" class="muted">Файлы ещё не загружены</td></tr>';
-        return;
-      }
-
-      files.forEach((file) => {
-        const row = document.createElement('tr');
-        const size = file.size < 1024 ? file.size + ' B' : (file.size / 1024).toFixed(1) + ' KB';
-        row.innerHTML = '<td>' + file.name + '</td><td>' + (file.type || 'unknown') + '</td><td>' + size + '</td>';
-        table.appendChild(row);
-      });
-    });
-
-    const robotState = document.getElementById('robotState');
-    const robotLog = document.getElementById('robotLog');
-
-    function logRobot(message) {
-      const time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-      robotLog.textContent += '\n' + time + ' — ' + message;
-      robotLog.scrollTop = robotLog.scrollHeight;
-    }
-
-    document.getElementById('start').addEventListener('click', () => {
-      robotState.textContent = 'ONLINE';
-      robotState.className = 'state-ok';
-      logRobot('Запуск симулятора завершён');
-    });
-
-    document.getElementById('pause').addEventListener('click', () => {
-      robotState.textContent = 'PAUSED';
-      robotState.className = 'state-warn';
-      logRobot('Сценарий переведён в режим паузы');
-    });
-
-    function loadSettings() {
-      try {
-        const saved = JSON.parse(localStorage.getItem('rover-settings') || '{}');
-        document.getElementById('projectName').value = saved.name || 'ROVER AI System Integrator';
-        document.getElementById('apiUrl').value = saved.apiUrl || 'https://api.example.internal/v1';
-        document.getElementById('modelName').value = saved.model || 'Local demo model';
-        document.getElementById('region').value = saved.region || 'eu-central-1';
-      } catch (error) {
-        console.warn('Settings load failed', error);
-      }
-    }
-
-    function saveSettings() {
-      const settings = {
-        name: document.getElementById('projectName').value,
-        apiUrl: document.getElementById('apiUrl').value,
-        model: document.getElementById('modelName').value,
-        region: document.getElementById('region').value
-      };
-
-      localStorage.setItem('rover-settings', JSON.stringify(settings));
-      logRobot('Настройки проекта сохранены в локальное хранилище');
-    }
-
-    document.getElementById('save').addEventListener('click', saveSettings);
-
-    document.getElementById('reset').addEventListener('click', () => {
-      localStorage.removeItem('rover-settings');
-      document.getElementById('projectName').value = 'ROVER AI System Integrator';
-      document.getElementById('apiUrl').value = 'https://api.example.internal/v1';
-      document.getElementById('modelName').value = 'Local demo model';
-      document.getElementById('region').value = 'eu-central-1';
-      logRobot('Настройки сброшены к значениям по умолчанию');
-    });
-
-    loadSettings();
-  </script>
 </body>
 </html>
