@@ -40,7 +40,7 @@ conversationsRouter.get("/conversations/:conversationId/messages", asyncRoute(as
 
 conversationsRouter.post("/conversations/:conversationId/messages", asyncRoute(async (req, res) => {
   const role = req.body?.role;
-  if (!["user", "assistant"].includes(role)) throw httpError(400, "INVALID_ROLE", "Message role must be user or assistant.");
+  if (role !== "user") throw httpError(400, "INVALID_ROLE", "Only user messages can be submitted from the public API.");
   const content = requireText(req.body?.content, "Message content", 100_000);
   const metadata = req.body?.metadata ?? {};
   if (!metadata || typeof metadata !== "object" || Array.isArray(metadata)) {
