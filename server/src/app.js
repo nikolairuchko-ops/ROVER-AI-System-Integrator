@@ -7,6 +7,7 @@ import { checkDatabase } from "./db.js";
 import { authRouter, authenticate } from "./auth.js";
 import { projectsRouter } from "./projects.js";
 import { conversationsRouter } from "./conversations.js";
+import { agentRouter } from "./agent.js";
 
 export const app = express();
 
@@ -61,7 +62,7 @@ app.get("/api/v1/system/info", (_req, res) => {
       authentication: "active",
       projects: "active",
       conversationHistory: "active",
-      aiOrchestration: "not_connected",
+      aiOrchestration: process.env.OPENAI_API_KEY ? "connected" : "knowledge_ready_model_not_configured",
       deviceGateway: "not_connected"
     }
   });
@@ -71,6 +72,7 @@ app.use("/api/v1/auth", authRouter);
 app.get("/api/v1/auth/me", authenticate, (req, res) => res.json({ user: req.user }));
 app.use("/api/v1/projects", projectsRouter);
 app.use("/api/v1", conversationsRouter);
+app.use("/api/v1/agent", agentRouter);
 
 app.use((_req, res) => {
   res.status(404).json({ error: { code: "NOT_FOUND", message: "The requested resource was not found." } });
