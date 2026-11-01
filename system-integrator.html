@@ -182,7 +182,7 @@ function renderModules(){
  $("#overviewModules").innerHTML=html;$("#moduleRegistry").innerHTML=html;
 }
 renderModules();
-function setTag(id,text,cls=""){const el=$("#"+id);if(!el)return;el.textContent=text;el.className="tag"+(cls?" "+cls:"")}
+function setTag(id,text,cls=""){document.querySelectorAll("#"+id).forEach(el=>{el.textContent=text;el.className="tag"+(cls?" "+cls)})}
 function setText(id,text){const el=$("#"+id);if(el)el.textContent=text}
 function apiBase(){return ($("#apiUrl").value.trim()||API_DEFAULT).replace(/\/+$/,"")}
 function getToken(){try{return sessionStorage.getItem("roverSession")||""}catch{return ""}}
